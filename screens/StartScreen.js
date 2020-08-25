@@ -1,30 +1,32 @@
-import React from 'react';
-import {View, Text , StyleSheet , Alert} from 'react-native';
+import React,{useEffect} from 'react';
+import {View, Text , StyleSheet , Alert,BackHandler} from 'react-native';
+import RNCloseApp from 'react-native-close-app';
+import RNExitApp from 'react-native-exit-app';
+
+
+
 
 import Button from '../components/Button'
 
 
-const exitHandler = () =>{
-    Alert.alert(
-        "Alert",
-        "Doriti sa inchideti aplicatia ?",
-        [
-            {
-                text:'Da',
-                onPress : ( ) => console.log("Daa")
-            },
-            {
-                text:'NU',
-                onPress : ( ) => console.log("NU")
-            }
-        ]
-    )
-}
-const StartScreen = props =>{
 
+ 
+const StartScreen = props =>{
+    const backAction = () => {
+        Alert.alert("Hold on!", "Are you sure you want to go back?", [
+          {
+            text: "Cancel",
+            onPress: () => null,
+            style: "cancel"
+          },
+          { text: "YES", onPress: () => console.log("CLose the app")}
+        ]);
+        return true;
+      };
+   
     return(
         <View  style={styles.container}>
-            <Text style = {styles.text}> Start Screen  </Text>
+
             <View style ={styles.buttonsContainer}>
                 
                 <Button title=" Start"  onSelect ={() =>{
@@ -35,10 +37,10 @@ const StartScreen = props =>{
                      props.navigation.navigate({routeName : 'OptionsScreen'})
                 }}/>
                 
-                <Button title="Exit"  onSelect ={exitHandler}/>
+                <Button title="Exit"  onSelect ={backAction}/>
 
             </View>
-            
+           
             
         </View>
     )
@@ -47,16 +49,26 @@ const StartScreen = props =>{
 const styles = StyleSheet.create({
     container:{
         flex:1,
-        justifyContent:'center',
-        alignItems:"center"
-    },
-    text:{
-        fontSize:18,
-        paddingVertical :10
+
+        alignItems:"center",
+        width:'100%',
+        height:'100%',
+        backgroundColor: '#fff',
+        
+        
     },
     buttonsContainer:{
-        flexDirection:'column'
+        flexDirection:'column',
+        width:'100%',
+        
+        height:'60%',
+        marginTop:'30%'
     }
+    // text:{
+    //     fontSize:18,
+    //     paddingVertical :10
+    // },
+    
 })
 
 

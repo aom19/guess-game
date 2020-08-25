@@ -31,7 +31,14 @@ const ScreensNavigator = createStackNavigator({
         }
     },
     GameScreen :{
-        screen: GameScreen
+        screen: GameScreen,
+        navigationOptions:{
+            headerTitle:'Game Screen',
+            headerStyle: {
+                backgroundColor: Platform.OS === 'ios' ? '#1F2025' : Colors.primaryColor
+            },
+            headerTintColor  : 'white'
+        }
     },
     OptionsScreen:{
         screen: OptionsScreen,
